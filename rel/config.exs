@@ -39,6 +39,13 @@ environment :prod do
   set include_src: false
   set cookie: :"P<=qX[v~$nB]K}^X6]zKkXN9)Z3]AXd(z;cM2C$DA4jnv<m9{PE^uE<|j)F}x2M["
   set vm_args: "rel/vm.args"
+
+  set config_providers: [
+    {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
+  ]
+  set overlays: [
+    {:copy, "rel/config/config.exs", "etc/config.exs"}
+  ]
 end
 
 # You may define one or more releases in this file.
@@ -47,7 +54,7 @@ end
 # will be used by default
 
 release :scyther_umbrella do
-  set version: "0.2.0"
+  set version: current_version(:kube_native)
   set applications: [
     :runtime_tools,
     scyther: :permanent,

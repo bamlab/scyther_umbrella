@@ -4,6 +4,8 @@
 # the umbrella root.
 use Mix.Config
 
+config :phoenix, :json_library, Jason
+
 # General application configuration
 config :scyther_web,
   ecto_repos: [Scyther.Repo],
