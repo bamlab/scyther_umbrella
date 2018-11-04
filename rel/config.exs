@@ -8,14 +8,13 @@
 |> Enum.map(&Code.eval_file(&1))
 
 use Mix.Releases.Config,
-    # This sets the default release built by `mix release`
-    default_release: :default,
-    # This sets the default environment used by `mix release`
-    default_environment: Mix.env()
+  # This sets the default release built by `mix release`
+  default_release: :default,
+  # This sets the default environment used by `mix release`
+  default_environment: Mix.env()
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/config/distillery.html
-
 
 # You may define one or more environments in this file,
 # an environment's settings will override those of a release
@@ -29,23 +28,28 @@ environment :dev do
   # It is recommended that you build with MIX_ENV=prod and pass
   # the --env flag to Distillery explicitly if you want to use
   # dev mode.
-  set dev_mode: true
-  set include_erts: false
-  set cookie: :"P*]2Sa]>7oak/nP^C:%IC^U?Aa8.,K8jPW|%Fy=<8pJHSZZWF.y(V&xzg68%,U3f"
+  set(dev_mode: true)
+  set(include_erts: false)
+  set(cookie: :"P*]2Sa]>7oak/nP^C:%IC^U?Aa8.,K8jPW|%Fy=<8pJHSZZWF.y(V&xzg68%,U3f")
 end
 
 environment :prod do
-  set include_erts: true
-  set include_src: false
-  set cookie: :"P<=qX[v~$nB]K}^X6]zKkXN9)Z3]AXd(z;cM2C$DA4jnv<m9{PE^uE<|j)F}x2M["
-  set vm_args: "rel/vm.args"
+  set(include_erts: true)
+  set(include_src: false)
+  set(cookie: :"P<=qX[v~$nB]K}^X6]zKkXN9)Z3]AXd(z;cM2C$DA4jnv<m9{PE^uE<|j)F}x2M[")
+  set(vm_args: "rel/vm.args")
 
-  set config_providers: [
-    {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
-  ]
-  set overlays: [
-    {:copy, "rel/config/config.exs", "etc/config.exs"}
-  ]
+  set(
+    config_providers: [
+      {Mix.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}
+    ]
+  )
+
+  set(
+    overlays: [
+      {:copy, "rel/config/config.exs", "etc/config.exs"}
+    ]
+  )
 end
 
 # You may define one or more releases in this file.
@@ -54,11 +58,20 @@ end
 # will be used by default
 
 release :scyther_umbrella do
-  set version: current_version(:kube_native)
-  set applications: [
-    :runtime_tools,
-    scyther: :permanent,
-    scyther_web: :permanent
-  ]
-end
+  set(version: current_version(:scyther))
 
+  set(
+    applications: [
+      :runtime_tools,
+      scyther: :permanent,
+      scyther_web: :permanent
+    ]
+  )
+
+  set(
+    commands: [
+      migrate: "rel/scripts/migrate.sh",
+      seed: "rel/scripts/seed.sh"
+    ]
+  )
+end
