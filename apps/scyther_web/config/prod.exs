@@ -60,7 +60,8 @@ config :scyther_web, ScytherWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start the server for all endpoints:
 #
-#     config :phoenix, :serve_endpoints, true
+config :phoenix, :serve_endpoints, true
+
 #
 # Alternatively, you can configure exactly which server to
 # start per endpoint:
