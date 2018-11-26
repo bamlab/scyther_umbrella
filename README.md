@@ -1,6 +1,6 @@
 # Scyther.Umbrella
 
-Anti-fog, preventive pokemon connected to your trello and google agenda.
+Payment app.
 
 ## Authors
 
