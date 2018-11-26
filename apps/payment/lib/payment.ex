@@ -1,0 +1,2 @@
+defmodule Payment do
+end
